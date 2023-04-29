@@ -126,9 +126,10 @@ export const config: Record<string, SearchEngine> = {
   },
   codedrills: {
     inputQuery: ["input[name='query']"],
-    bodyQuery: ['div[class="v-window-item v-window-item--active"]'],
-    sidebarContainerQuery: ['div[class="v-window__container"]'],
+    bodyQuery: [
+      '#app > div > div:nth-child(2) > main > div > span > div.container.container--fluid > div > div > span > span > div.v-window.v-item-group.theme--light.v-tabs-items > div > div > span > div > div:nth-child(1)',
+    ],
+    sidebarContainerQuery: ['div[class="v-list-item__content"]'],
     appendContainerQuery: [],
   },
-  codedrills,
 }

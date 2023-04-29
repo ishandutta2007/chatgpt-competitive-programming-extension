@@ -24,8 +24,7 @@
 * "https://community.topcoder.com/stat?c=problem_statement*"
 * "https://lightoj.com/problem/*",
 * "https://toph.co/p/*",
-* "https://cses.fi/*",
-* "https://codedrills.io/problems/*"
+* "https://cses.fi/*"
 
 
 (To be fixed:)
@@ -35,7 +34,8 @@
 * "https://poj.org/problem?id=*",
 * "https://www.interviewbit.com/problems/*",
 * "https://my.newtonschool.co/playground/code/*"
-* "https://geeksforgeeks.org"
+* "https://geeksforgeeks.org",
+* "https://codedrills.io/problems/*"
 
 
 ## Custom Prompt
