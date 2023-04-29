@@ -80,4 +80,10 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['#comments'],
     appendContainerQuery: [],
   },
+  timus: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['div[class="problem_content"]'],
+    sidebarContainerQuery: ['div[class="problem_links"]'],
+    appendContainerQuery: [],
+  },
 }

@@ -18,7 +18,8 @@
 * "https://www.hackerrank.com/challenges/*"
 * "https://www.hackerearth.com/*",
 * "https://open.kattis.com/problems/*",
-* "https://dmoj.ca/problem/*"
+* "https://dmoj.ca/problem/*",
+* "https://acm.timus.ru/problem.aspx*"
 
 
 (To be fixed:)
