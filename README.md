@@ -12,10 +12,16 @@
 
 ## Avaiable Sites (TBA or TBA as a configuration feature)
 * "https://www.spoj.com/*",
-* "https://www.spoj.com/*",
 * "https://codeforces.com/*",
-* "https://leetcode.com/*",
 * "https://projecteuler.net/problem=*",
+* "https://atcoder.jp/*"
+
+(To be fixed:)
+
+* "https://leetcode.com/*",
+* "https://www.codechef.com/*",
+* "https://poj.org/problem?id=*",
+* "https://www.interviewbit.com/problems/*",
 
 ## Custom Prompt
 You can change the prompt.
