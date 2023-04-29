@@ -6,9 +6,9 @@
 
 ## Screenshot
 
-<img width="1031" alt="image" src="https://raw.githubusercontent.com/ishandutta2007/chatgpt-stackexchange-extension/main/screenshots/spoj.png">
+<img width="1031" alt="image" src="https://raw.githubusercontent.com/ishandutta2007/chatgpt-competitive-programming-extension/main/screenshots/spoj.png">
 
-<img width="1031" alt="image" src="https://raw.githubusercontent.com/ishandutta2007/chatgpt-stackexchange-extension/main/screenshots/codeforces.png">
+<img width="1031" alt="image" src="https://raw.githubusercontent.com/ishandutta2007/chatgpt-competitive-programming-extension/main/screenshots/codeforces.png">
 
 ## Avaiable Sites (TBA or TBA as a configuration feature)
 * "https://www.spoj.com/*",
@@ -19,7 +19,7 @@
 
 ## Custom Prompt
 You can change the prompt.
-<img width="1031" alt="image" src="https://raw.githubusercontent.com/ishandutta2007/chatgpt-stackexchange-extension/main/screenshots/prompt.png">
+<img width="1031" alt="image" src="https://raw.githubusercontent.com/ishandutta2007/chatgpt-competitive-programming-extension/main/screenshots/prompt.png">
 
 ## Troubleshooting
 
