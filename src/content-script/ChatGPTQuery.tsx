@@ -187,7 +187,7 @@ function ChatGPTQuery(props: Props) {
               disabled={!reQuestionDone}
               type="text"
               ref={inputRef}
-              placeholder="Ask Me Anything"
+              placeholder="Tell Me More"
               id="question"
               style={{ width: '100%', padding: '1rem' }}
             />
