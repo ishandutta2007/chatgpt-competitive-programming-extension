@@ -41,7 +41,7 @@ function AddNewPromptModal(props: {
           width={'100%'}
           clearable
           label="site"
-          placeholder="https://arxiv.org/"
+          placeholder="https://spoj.com/"
           onChange={(e) => setSite(e.target.value)}
         >
           {siteError && (

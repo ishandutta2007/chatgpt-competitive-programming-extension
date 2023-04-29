@@ -1,8 +1,8 @@
 {
   "appName": {
-    "message": "ArxivGPT"
+    "message": "CPGPT"
   },
   "appDesc": {
-    "message": "Суммировать и предоставлять ключевые взгляды для любой статьи arxiv"
+    "message": "Суммировать и предоставлять ключевые взгляды для любой статьи competitive-programming"
   }
 }

@@ -26,14 +26,17 @@ async function mount(question: string, promptSource: string, siteConfig: SearchE
 
   const siderbarContainer = getPossibleElementByQuerySelector(siteConfig.sidebarContainerQuery)
   if (siderbarContainer) {
+    console.log('if container', container)
     siderbarContainer.prepend(container)
   } else {
     container.classList.add('sidebar-free')
     const appendContainer = getPossibleElementByQuerySelector(siteConfig.appendContainerQuery)
+    console.log('else appendContainer', appendContainer)
     if (appendContainer) {
       appendContainer.appendChild(container)
     }
   }
+  console.debug('question:', question)
 
   render(
     <ChatGPTContainer
@@ -74,10 +77,16 @@ export async function requeryMount(question: string, index: number) {
 }
 
 const siteRegex = new RegExp(Object.keys(config).join('|'))
+// /google|spoj|arxiv|biorxiv|pubmed|ieeexplore/
 const siteName = location.hostname.match(siteRegex)![0]
+// const siteName = "spoj"
 const siteConfig = config[siteName]
 
 async function run() {
+  // alert(siteRegex)
+  // alert(location.hostname.match(siteRegex)![0])
+  // alert(siteName)
+  // alert("CPGPT Extension Running")
   const searchInput = getPossibleElementByQuerySelector<HTMLInputElement>(siteConfig.inputQuery)
   console.debug('Try to Mount ChatGPT on', siteName)
 
@@ -90,12 +99,15 @@ async function run() {
       console.log('Body: ' + bodyInnerText)
       const userConfig = await getUserConfig()
 
-      const found = userConfig.promptOverrides.find(
-        (override) => new URL(override.site).hostname === location.hostname,
-      )
+      // const found = userConfig.promptOverrides.find(
+      //   (override) => new URL(override.site).hostname === location.hostname,
+      // )
+      const found = true
       const question = found?.prompt ?? userConfig.prompt
       const promptSource = found?.site ?? 'default'
 
+      console.debug('question(raw):', question)
+      console.debug('bodyInnerText:', bodyInnerText)
       mount(question + bodyInnerText, promptSource, siteConfig)
     }
   }

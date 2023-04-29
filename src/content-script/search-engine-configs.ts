@@ -13,6 +13,12 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['#rhs'],
     appendContainerQuery: ['#rcnt'],
   },
+  spoj: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['#problem-body'],
+    sidebarContainerQuery: ['#ccontent'],
+    appendContainerQuery: [],
+  },
   arxiv: {
     inputQuery: ["input[name='query']"],
     bodyQuery: ['#abs'],

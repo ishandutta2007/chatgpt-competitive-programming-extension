@@ -25,6 +25,7 @@
     {
       "matches": [
         "https://arxiv.org/*",
+        "https://www.spoj.com/problems/*",
         "https://www.biorxiv.org/content/*",
         "https://pubmed.ncbi.nlm.nih.gov/*",
         "https://ieeexplore.ieee.org/document/*"

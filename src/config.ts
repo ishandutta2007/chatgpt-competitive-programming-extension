@@ -7,10 +7,10 @@ export enum TriggerMode {
 }
 
 export const TRIGGER_MODE_TEXT = {
-  [TriggerMode.Always]: { title: 'Always', desc: 'ArxivGPT is queried on every search' },
+  [TriggerMode.Always]: { title: 'Always', desc: 'CPGPT is queried on every search' },
   [TriggerMode.Manually]: {
     title: 'Manually',
-    desc: 'ArxivGPT is queried when you manually click a button',
+    desc: 'CPGPT is queried when you manually click a button',
   },
 }
 
@@ -33,12 +33,12 @@ export enum Language {
 }
 
 export const Prompt =
-  'Please summarize the paper by author(s) in one concise sentence. \
- Then, list key insights and lessons learned from the paper.\
- Next, generate 3-5 questions that you would like to ask the authors about their work. \
- Finally, provide 3-5 suggestions for related topics or future research directions \
- based on the content of the paper. \
- If applicable, list at least 5 relevant references from the field of study of the paper. \
+  'First summarise the story of the following into a short problem statement.\
+   Now suggest suitable algorithm for this problem. \
+   Also try to solve it in as minimum time complexity as possible.\
+   If you can think of any other time complexity solution do suggest that too.\
+   Next, suggest 3-4 problems requiring similar algorithm. \
+   Here is the full story of the problem: \
  '
 
 export interface SitePrompt {

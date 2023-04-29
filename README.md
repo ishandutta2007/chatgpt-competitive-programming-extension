@@ -1,4 +1,4 @@
-# arXivGPT
+# CPGPT
 
 [link-chrome]: https://chrome.google.com/webstore/detail/arxivgpt/fbbfpcjhnnklhmncjickdipdlhoddjoh?hl=en&authuser=0 'Chrome Web Store'
 
@@ -6,17 +6,14 @@
 
 ## Screenshot
 
-<img width="1418" alt="image" src="https://user-images.githubusercontent.com/901975/217130285-20d0bf67-e9a8-46ca-9d9d-f49b42515a7d.png">
+<img width="1418" alt="image" src="https://raw.githubusercontent.com/ishandutta2007/chatgpt-stackexchange-extension/main/screenshots/spoj.png">
 
 ## Avaiable Sites (TBA or TBA as a configuration feature)
-* "https://arxiv.org/*",
-* "https://www.biorxiv.org/content/*",
-* "https://pubmed.ncbi.nlm.nih.gov/*",
-* "https://ieeexplore.ieee.org/document/*"
+* "https://www.spoj.com/*",
 
 ## Custom Prompt
 You can change the prompt.
-<img width="1031" alt="image" src="https://user-images.githubusercontent.com/901975/217131081-d5487c3f-cb5c-46f4-be21-e4f1a22e9fce.png">
+<img width="1031" alt="image" src="https://raw.githubusercontent.com/ishandutta2007/chatgpt-stackexchange-extension/main/screenshots/prompt.png">
 
 ## Troubleshooting
 
