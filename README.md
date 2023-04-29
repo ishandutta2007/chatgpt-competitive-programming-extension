@@ -6,7 +6,9 @@
 
 ## Screenshot
 
-<img width="1418" alt="image" src="https://raw.githubusercontent.com/ishandutta2007/chatgpt-stackexchange-extension/main/screenshots/spoj.png">
+<img  alt="image" src="https://raw.githubusercontent.com/ishandutta2007/chatgpt-stackexchange-extension/main/screenshots/spoj.png">
+
+<img  alt="image" src="https://raw.githubusercontent.com/ishandutta2007/chatgpt-stackexchange-extension/main/screenshots/codeforces.png">
 
 ## Avaiable Sites (TBA or TBA as a configuration feature)
 * "https://www.spoj.com/*",
