@@ -36,7 +36,8 @@ export const Prompt =
   'First summarise the story of the following into a short problem statement.\
    Now suggest suitable algorithm for this problem. \
    Also try to solve it in as minimum time complexity as possible.\
-   If you can think of any other time complexity solution do suggest that too.\
+   If possible add Pseudo-code or code as well.\
+   If you can think of any other solution with different time complexity do suggest that too.\
    Next, suggest 3-4 problems requiring similar algorithm. \
    Here is the full story of the problem: \
  '
