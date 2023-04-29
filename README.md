@@ -24,7 +24,8 @@
 * "https://community.topcoder.com/stat?c=problem_statement*"
 * "https://lightoj.com/problem/*",
 * "https://toph.co/p/*",
-* "https://cses.fi/*"
+* "https://cses.fi/*",
+* "https://codedrills.io/problems/*"
 
 
 (To be fixed:)

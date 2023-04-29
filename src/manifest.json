@@ -43,7 +43,8 @@
         "https://lightoj.com/problem/*",
         "https://toph.co/p/*",
         "https://my.newtonschool.co/playground/code/*",
-        "https://cses.fi/*"
+        "https://cses.fi/*",
+        "https://codedrills.io/problems/*"
       ],
       "js": ["content-script.js"],
       "css": ["content-script.css"]

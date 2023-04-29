@@ -124,4 +124,11 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['div[class="nav sidebar"]'],
     appendContainerQuery: [],
   },
+  codedrills: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['div[class="v-window-item v-window-item--active"]'],
+    sidebarContainerQuery: ['div[class="v-window__container"]'],
+    appendContainerQuery: [],
+  },
+  codedrills,
 }
