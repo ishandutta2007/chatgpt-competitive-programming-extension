@@ -50,6 +50,12 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['div[class="p-similar-questions"]'],
     appendContainerQuery: [],
   },
+  atcoder: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['#task-statement > span > span.lang-en > div:nth-child(2) > section'],
+    sidebarContainerQuery: ['form[class="form-horizontal form-code-submit"]'],
+    appendContainerQuery: [],
+  },
   arxiv: {
     inputQuery: ["input[name='query']"],
     bodyQuery: ['#abs'],

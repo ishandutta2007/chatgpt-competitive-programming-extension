@@ -24,7 +24,6 @@
   "content_scripts": [
     {
       "matches": [
-        "https://arxiv.org/*",
         "https://www.spoj.com/problems/*",
         "https://codeforces.com/*",
         "https://leetcode.com/*",
@@ -32,9 +31,7 @@
         "https://www.codechef.com/*",
         "https://poj.org/problem?id=*",
         "https://www.interviewbit.com/problems/*",
-        "https://www.biorxiv.org/content/*",
-        "https://pubmed.ncbi.nlm.nih.gov/*",
-        "https://ieeexplore.ieee.org/document/*"
+        "https://atcoder.jp/*"
       ],
       "js": ["content-script.js"],
       "css": ["content-script.css"]
