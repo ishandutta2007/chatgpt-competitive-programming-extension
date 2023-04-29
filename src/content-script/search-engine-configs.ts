@@ -94,4 +94,10 @@ export const config: Record<string, SearchEngine> = {
     ],
     appendContainerQuery: [],
   },
+  topcoder: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['td[class="problemText"]'],
+    sidebarContainerQuery: ['td[class="bodyTextBold"]'],
+    appendContainerQuery: [],
+  },
 }

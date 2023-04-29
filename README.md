@@ -20,7 +20,8 @@
 * "https://open.kattis.com/problems/*",
 * "https://dmoj.ca/problem/*",
 * "https://acm.timus.ru/problem.aspx*",
-* "https://www.eolymp.com/en/problems/*"
+* "https://www.eolymp.com/en/problems/*",
+* "https://community.topcoder.com/stat?c=problem_statement*"
 
 
 (To be fixed:)
