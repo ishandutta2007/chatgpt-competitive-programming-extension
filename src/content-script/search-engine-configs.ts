@@ -74,4 +74,10 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['#instructions-container'],
     appendContainerQuery: [],
   },
+  dmoj: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['div[class="content-description screen"]'],
+    sidebarContainerQuery: ['#comments'],
+    appendContainerQuery: [],
+  },
 }

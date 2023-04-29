@@ -17,7 +17,9 @@
 * "https://atcoder.jp/*"
 * "https://www.hackerrank.com/challenges/*"
 * "https://www.hackerearth.com/*",
-* "https://open.kattis.com/problems/*"
+* "https://open.kattis.com/problems/*",
+* "https://dmoj.ca/problem/*"
+
 
 (To be fixed:)
 
