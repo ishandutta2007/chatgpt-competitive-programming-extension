@@ -23,7 +23,8 @@
 * "https://www.eolymp.com/en/problems/*",
 * "https://community.topcoder.com/stat?c=problem_statement*"
 * "https://lightoj.com/problem/*",
-* "https://toph.co/p/*"
+* "https://toph.co/p/*",
+* "https://cses.fi/*"
 
 
 (To be fixed:)
@@ -32,6 +33,9 @@
 * "https://www.codechef.com/*",
 * "https://poj.org/problem?id=*",
 * "https://www.interviewbit.com/problems/*",
+* "https://my.newtonschool.co/playground/code/*"
+* "https://geeksforgeeks.org"
+
 
 ## Custom Prompt
 You can change the prompt.

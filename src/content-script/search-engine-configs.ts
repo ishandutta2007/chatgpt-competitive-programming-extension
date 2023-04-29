@@ -112,4 +112,16 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['form[id="frmSubmit"]'],
     appendContainerQuery: [],
   },
+  newtonschool: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['#controlled-tab-example-tabpane-question > div[class="row"]'],
+    sidebarContainerQuery: ['div[class="main-container"]'],
+    appendContainerQuery: [],
+  },
+  cses: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['div[class="content"]'],
+    sidebarContainerQuery: ['div[class="nav sidebar"]'],
+    appendContainerQuery: [],
+  },
 }

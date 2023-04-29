@@ -41,7 +41,9 @@
         "https://www.eolymp.com/en/problems/*",
         "https://community.topcoder.com/stat?c=problem_statement*",
         "https://lightoj.com/problem/*",
-        "https://toph.co/p/*"
+        "https://toph.co/p/*",
+        "https://my.newtonschool.co/playground/code/*",
+        "https://cses.fi/*"
       ],
       "js": ["content-script.js"],
       "css": ["content-script.css"]
