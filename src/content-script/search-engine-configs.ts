@@ -56,6 +56,12 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['form[class="form-horizontal form-code-submit"]'],
     appendContainerQuery: [],
   },
+  hackerrank: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['div[class="msB challenge_problem_statement_body"]'],
+    sidebarContainerQuery: ['div[class="fs-right-pane"]'],
+    appendContainerQuery: [],
+  },
   arxiv: {
     inputQuery: ["input[name='query']"],
     bodyQuery: ['#abs'],
