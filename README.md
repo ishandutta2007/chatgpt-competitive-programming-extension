@@ -15,6 +15,8 @@
 * "https://codeforces.com/*",
 * "https://projecteuler.net/problem=*",
 * "https://atcoder.jp/*"
+* "https://www.hackerrank.com/challenges/*"
+* "https://www.hackerearth.com/*"
 
 (To be fixed:)
 
