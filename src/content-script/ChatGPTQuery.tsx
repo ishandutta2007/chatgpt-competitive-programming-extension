@@ -243,7 +243,7 @@ function ChatGPTQuery(props: Props) {
     )
   }
 
-  return <p className="text-[#b6b8ba] animate-pulse">Waiting for ChatGPT summarize...</p>
+  return <p className="text-[#b6b8ba] animate-pulse">Waiting for ChatGPT solution...</p>
 }
 
 export default memo(ChatGPTQuery)

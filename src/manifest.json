@@ -27,6 +27,12 @@
       "matches": [
         "https://arxiv.org/*",
         "https://www.spoj.com/*",
+        "https://codeforces.com/*",
+        "https://leetcode.com/*",
+        "https://projecteuler.net/problem=*",
+        "https://www.codechef.com/*",
+        "https://poj.org/problem?id=*",
+        "https://www.interviewbit.com/problems/*",
         "https://www.biorxiv.org/content/*",
         "https://pubmed.ncbi.nlm.nih.gov/*",
         "https://ieeexplore.ieee.org/document/*"

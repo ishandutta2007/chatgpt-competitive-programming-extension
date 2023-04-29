@@ -19,6 +19,37 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['#ccontent'],
     appendContainerQuery: [],
   },
+  codeforces: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['div[class="problem-statement"]'],
+    sidebarContainerQuery: ['#footer'],
+    appendContainerQuery: [],
+  },
+  projecteuler: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['div[class="problem_content"]'],
+    sidebarContainerQuery: ['#problem_answer'],
+    appendContainerQuery: [],
+  },
+  leetcode: {},
+  codechef: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['#problem-statement'],
+    sidebarContainerQuery: ['#vertical-tab-panel-1'],
+    appendContainerQuery: [],
+  },
+  poj: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['td'],
+    sidebarContainerQuery: ['tr'],
+    appendContainerQuery: [],
+  },
+  interviewbit: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['#problem_description_markdown_content_value'],
+    sidebarContainerQuery: ['div[class="p-similar-questions"]'],
+    appendContainerQuery: [],
+  },
   arxiv: {
     inputQuery: ["input[name='query']"],
     bodyQuery: ['#abs'],
