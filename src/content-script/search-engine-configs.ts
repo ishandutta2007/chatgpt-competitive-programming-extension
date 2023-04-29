@@ -106,4 +106,10 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['div[class="card-footer"]'],
     appendContainerQuery: [],
   },
+  toph: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['div[class="artifact"]'],
+    sidebarContainerQuery: ['form[id="frmSubmit"]'],
+    appendContainerQuery: [],
+  },
 }
