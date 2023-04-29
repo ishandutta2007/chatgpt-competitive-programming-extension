@@ -100,4 +100,10 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['td[class="bodyTextBold"]'],
     appendContainerQuery: [],
   },
+  lightoj: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['div[class="markdown-body"]'],
+    sidebarContainerQuery: ['div[class="card-footer"]'],
+    appendContainerQuery: [],
+  },
 }

@@ -22,6 +22,7 @@
 * "https://acm.timus.ru/problem.aspx*",
 * "https://www.eolymp.com/en/problems/*",
 * "https://community.topcoder.com/stat?c=problem_statement*"
+* "https://lightoj.com/problem/*"
 
 
 (To be fixed:)
