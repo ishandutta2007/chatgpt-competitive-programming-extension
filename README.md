@@ -16,7 +16,8 @@
 * "https://projecteuler.net/problem=*",
 * "https://atcoder.jp/*"
 * "https://www.hackerrank.com/challenges/*"
-* "https://www.hackerearth.com/*"
+* "https://www.hackerearth.com/*",
+* "https://open.kattis.com/problems/*"
 
 (To be fixed:)
 

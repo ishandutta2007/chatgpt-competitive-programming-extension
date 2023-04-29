@@ -68,4 +68,10 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['div[class="contributors-panel"]'],
     appendContainerQuery: [],
   },
+  kattis: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['div[class="problembody"]'],
+    sidebarContainerQuery: ['#instructions-container'],
+    appendContainerQuery: [],
+  },
 }
