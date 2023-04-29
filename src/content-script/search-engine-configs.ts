@@ -86,4 +86,12 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['div[class="problem_links"]'],
     appendContainerQuery: [],
   },
+  eolymp: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['div[class="eo-paper__content eo-problem-statement"]'],
+    sidebarContainerQuery: [
+      'div[class="eo-paper__content eo-paper__content_border eo-paper__content_muted eo-paper__content_compact"]',
+    ],
+    appendContainerQuery: [],
+  },
 }

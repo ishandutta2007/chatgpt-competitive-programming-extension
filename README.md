@@ -19,7 +19,8 @@
 * "https://www.hackerearth.com/*",
 * "https://open.kattis.com/problems/*",
 * "https://dmoj.ca/problem/*",
-* "https://acm.timus.ru/problem.aspx*"
+* "https://acm.timus.ru/problem.aspx*",
+* "https://www.eolymp.com/en/problems/*"
 
 
 (To be fixed:)
