@@ -35,10 +35,11 @@ export enum Language {
 export const Prompt =
   'First summarise the story of the following into a short problem statement.\
    Now suggest suitable algorithm for this problem. \
-   Also try to solve it in as minimum time complexity as possible.\
+   Also try to solve it in best time complexity possible.\
    If possible add Pseudo-code or code as well.\
    If you can think of any other solution with different time complexity do suggest that too.\
-   Next, suggest 3-4 problems requiring similar algorithm. \
+   Next, suggest 3-4 general problems which uses similar algorithm. \
+   Next, if you find any similar problems on any competitive programming platforms tell me about those too. \
    Here is the full story of the problem: \
  '
 

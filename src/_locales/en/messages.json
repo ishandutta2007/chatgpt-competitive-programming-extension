@@ -3,6 +3,6 @@
     "message": "CPGPT"
   },
   "appDesc": {
-    "message": "Solve a competitiveprogramming paper and provide key insights."
+    "message": "Competitive programming problem solving assistant using ChatGPT."
   }
 }
