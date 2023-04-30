@@ -31,7 +31,13 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['#problem_answer'],
     appendContainerQuery: [],
   },
-  leetcode: {},
+  leetcode: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['#qd-content'],
+    sidebarContainerQuery: ['nav'],
+    appendContainerQuery: [],
+  },
+
   codechef: {
     inputQuery: ["input[name='query']"],
     bodyQuery: ['#problem-statement'],
