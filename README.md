@@ -14,6 +14,7 @@
 * "https://www.spoj.com/*",
 * "https://codeforces.com/*",
 * "https://projecteuler.net/problem=*",
+* "https://poj.org/problem?id=*",
 * "https://atcoder.jp/*"
 * "https://www.hackerrank.com/challenges/*"
 * "https://www.hackerearth.com/*",
@@ -31,7 +32,6 @@
 
 * "https://leetcode.com/*",
 * "https://www.codechef.com/*",
-* "https://poj.org/problem?id=*",
 * "https://www.interviewbit.com/problems/*",
 * "https://my.newtonschool.co/playground/code/*"
 * "https://geeksforgeeks.org",

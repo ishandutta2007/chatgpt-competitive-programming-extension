@@ -29,7 +29,7 @@
         "https://leetcode.com/*",
         "https://projecteuler.net/problem=*",
         "https://www.codechef.com/*",
-        "https://poj.org/problem?id=*",
+        "http://poj.org/problem?id=*",
         "https://www.interviewbit.com/problems/*",
         "https://atcoder.jp/*",
         "https://www.hackerrank.com/challenges/*"

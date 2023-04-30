@@ -46,8 +46,8 @@ export const config: Record<string, SearchEngine> = {
   },
   poj: {
     inputQuery: ["input[name='query']"],
-    bodyQuery: ['td'],
-    sidebarContainerQuery: ['tr'],
+    bodyQuery: ['body > table:nth-child(3) > tbody > tr > td > div:nth-child(5)'],
+    sidebarContainerQuery: ['p[class="pst"]'],
     appendContainerQuery: [],
   },
   interviewbit: {
