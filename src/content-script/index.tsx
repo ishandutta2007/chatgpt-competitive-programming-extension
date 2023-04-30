@@ -77,16 +77,10 @@ export async function requeryMount(question: string, index: number) {
 }
 
 const siteRegex = new RegExp(Object.keys(config).join('|'))
-// /google|spoj|arxiv|biorxiv|pubmed|ieeexplore/
 const siteName = location.hostname.match(siteRegex)![0]
-// const siteName = "spoj"
 const siteConfig = config[siteName]
 
 async function run() {
-  // alert(siteRegex)
-  // alert(location.hostname.match(siteRegex)![0])
-  // alert(siteName)
-  // alert("CPGPT Extension Running")
   const searchInput = getPossibleElementByQuerySelector<HTMLInputElement>(siteConfig.inputQuery)
   console.debug('Try to Mount ChatGPT on', siteName)
 
