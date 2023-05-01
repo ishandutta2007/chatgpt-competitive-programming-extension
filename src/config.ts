@@ -40,6 +40,7 @@ export const Prompt =
    If you can think of any other solution with different time complexity do suggest that too.\
    Next, suggest 3-4 general problems which uses similar algorithm. \
    Next, if you find any similar problems on any competitive programming platforms tell me about those too. \
+   If you find any paper related to this algorithm tell me about those too. \
    Here is the full story of the problem: \
  '
 

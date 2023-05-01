@@ -22,7 +22,7 @@ export const config: Record<string, SearchEngine> = {
   codeforces: {
     inputQuery: ["input[name='query']"],
     bodyQuery: ['div[class="problem-statement"]'],
-    sidebarContainerQuery: ['#footer'],
+    sidebarContainerQuery: ['#sidebar'],
     appendContainerQuery: [],
   },
   projecteuler: {
@@ -37,7 +37,6 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['nav'],
     appendContainerQuery: [],
   },
-
   codechef: {
     inputQuery: ["input[name='query']"],
     bodyQuery: ['#problem-statement'],

@@ -81,7 +81,6 @@ const siteName = location.hostname.match(siteRegex)![0]
 const siteConfig = config[siteName]
 
 async function run() {
-  const searchInput = getPossibleElementByQuerySelector<HTMLInputElement>(siteConfig.inputQuery)
   console.debug('Try to Mount ChatGPT on', siteName)
 
   if (siteConfig.bodyQuery) {
@@ -105,16 +104,6 @@ async function run() {
       mount(question + bodyInnerText, promptSource, siteConfig)
     }
   }
-
-  //const searchInput = getPossibleElementByQuerySelector<HTMLInputElement>(siteConfig.inputQuery)
-  //if (searchInput && searchInput.value) {
-  //  console.debug('Mount ChatGPT on', siteName)
-  //  const userConfig = await getUserConfig()
-  //  const searchValueWithLanguageOption =
-  //    userConfig.language === Language.Auto
-  //      ? searchInput.value
-  //      : `${searchInput.value}(in ${userConfig.language})`
-  //  mount(searchValueWithLanguageOption, siteConfig)
 }
 
 run()
