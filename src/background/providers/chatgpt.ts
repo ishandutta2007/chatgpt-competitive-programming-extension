@@ -101,7 +101,7 @@ export class ChatGPTProvider implements Provider {
         ],
         model: modelName,
         parent_message_id: params.parentMessageId || uuidv4(),
-        conversationId: params.conversationId,
+        conversation_id: params.conversationId,
       }),
       onMessage(message: string) {
         console.debug('sse message', message)
@@ -114,7 +114,9 @@ export class ChatGPTProvider implements Provider {
         try {
           data = JSON.parse(message)
         } catch (err) {
-          console.error(err)
+          if (new Date(message) !== 'Invalid Date' && !isNaN(new Date(message)))
+            console.debug('This is known issue')
+          else console.error(err)
           return
         }
         const text = data.message?.content?.parts?.[0] + '✏'

@@ -34,14 +34,14 @@ export enum Language {
 
 export const Prompt =
   'First summarise the story of the following into a short problem statement.\
-   Now suggest suitable algorithm for this problem. \
-   Also try to solve it in best time complexity possible.\
-   If possible add Pseudo-code or code as well.\
-   If you can think of any other solution with different time complexity do suggest that too.\
-   Next, suggest 3-4 general problems which uses similar algorithm. \
-   Next, if you find any similar problems on any competitive programming platforms tell me about those too. \
-   If you find any paper related to this algorithm tell me about those too. \
-   Here is the full story of the problem: \
+ Now suggest suitable algorithm for this problem. \
+ Make sure you try to solve it in the best possible time complexity.\
+ If possible add pseudo-code or code as well.\
+ If you can think of any alternative solution with different time complexity do suggest that too.\
+ Next, suggest 3-4 general problems which makes use of similar concept.\
+ Next, suggest 3-4 similar problems on any competitive programming platforms.\
+ Next, suggest 3-4 relevant papers(with publishing year) related to this algorithm.\
+ Here is the full story of the problem: \
  '
 
 export interface SitePrompt {
