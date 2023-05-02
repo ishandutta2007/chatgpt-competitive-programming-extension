@@ -33,7 +33,7 @@ export enum Language {
 }
 
 export const Prompt =
-  'First summarise the story of the following into a short problem statement.\
+  'First summarise the story of the following into a short problem statement(you can ignore proper nouns and focus on mathematical part while summarizing).\
  Now suggest suitable algorithm for this problem.\
  Make sure you try to solve it in the best possible time complexity.\
  If possible add pseudo-code or code as well.\
@@ -41,7 +41,7 @@ export const Prompt =
  Next, suggest 3-4 general problems which makes use of similar concept.\
  Next, suggest 3-4 similar problems on any competitive programming platforms.\
  Next, suggest 3-4 relevant papers(with publishing year) related to this algorithm.\
- Here is the full story of the problem: \
+ Here is the full story of the problem:\
  '
 
 export interface SitePrompt {
