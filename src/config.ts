@@ -34,7 +34,7 @@ export enum Language {
 
 export const Prompt =
   'First summarise the story of the following into a short problem statement.\
- Now suggest suitable algorithm for this problem. \
+ Now suggest suitable algorithm for this problem.\
  Make sure you try to solve it in the best possible time complexity.\
  If possible add pseudo-code or code as well.\
  If you can think of any alternative solution with different time complexity do suggest that too.\
