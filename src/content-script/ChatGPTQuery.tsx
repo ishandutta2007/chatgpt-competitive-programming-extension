@@ -24,7 +24,7 @@ interface Requestion {
 }
 
 interface ReQuestionAnswerProps {
-  answerText: string | undefined
+  latestAnswerText: string | undefined
 }
 
 function ChatGPTQuery(props: Props) {
@@ -39,7 +39,7 @@ function ChatGPTQuery(props: Props) {
   const [reQuestionDone, setReQuestionDone] = useState(false)
   const [requestionList, setRequestionList] = useState<Requestion[]>([])
   const [questionIndex, setQuestionIndex] = useState(0)
-  const [reQuestionAnswerText, setReQuestionAnswerText] = useState<string | undefined>()
+  const [reQuestionLatestAnswerText, setReQuestionLatestAnswerText] = useState<string | undefined>()
 
   useEffect(() => {
     props.onStatusChange?.(status)
@@ -106,8 +106,8 @@ function ChatGPTQuery(props: Props) {
           const requestionListValue = requestionList
           requestionListValue[questionIndex].answer = msg
           setRequestionList(requestionListValue)
-          const answerText = requestionList[questionIndex]?.answer?.text
-          setReQuestionAnswerText(answerText)
+          const latestAnswerText = requestionList[questionIndex]?.answer?.text
+          setReQuestionLatestAnswerText(latestAnswerText)
         } else if (msg.event === 'DONE') {
           setReQuestionDone(true)
           setQuestionIndex(questionIndex + 1)
@@ -148,13 +148,13 @@ function ChatGPTQuery(props: Props) {
     )
   }
 
-  const ReQuestionAnswer = ({ answerText }: ReQuestionAnswerProps) => {
-    if (!answerText || requestionList[requestionList.length - 1]?.answer?.text == undefined) {
+  const ReQuestionAnswer = ({ latestAnswerText }: ReQuestionAnswerProps) => {
+    if (!latestAnswerText || requestionList[requestionList.length - 1]?.answer?.text == undefined) {
       return <p className="text-[#b6b8ba] animate-pulse">Answering...</p>
     }
     return (
       <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
-        {answerText}
+        {latestAnswerText}
       </ReactMarkdown>
     )
   }
@@ -171,7 +171,7 @@ function ChatGPTQuery(props: Props) {
           <ChatGPTFeedback
             messageId={answer.messageId}
             conversationId={answer.conversationId}
-            answerText={answer.text}
+            latestAnswerText={answer.text}
           />
         </div>
         <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
@@ -191,7 +191,7 @@ function ChatGPTQuery(props: Props) {
               ) : requestion.index < requestionList.length - 1 ? (
                 <ReQuestionAnswerFixed text={requestion.answer?.text} />
               ) : (
-                <ReQuestionAnswer answerText={reQuestionAnswerText} />
+                <ReQuestionAnswer latestAnswerText={reQuestionLatestAnswerText} />
               )}
             </div>
           ))}
