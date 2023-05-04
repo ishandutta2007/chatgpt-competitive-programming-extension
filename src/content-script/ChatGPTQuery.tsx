@@ -212,13 +212,8 @@ function ChatGPTQuery(props: Props) {
               ref={inputRef}
               placeholder="Tell Me More"
               id="question"
-              style={{ width: '100%', padding: '1rem' }}
             />
-            <button
-              id="submit"
-              onClick={requeryHandler}
-              style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '0.2rem' }}
-            >
+            <button id="submit" onClick={requeryHandler}>
               ASK
             </button>
           </form>
