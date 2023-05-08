@@ -33,7 +33,7 @@ export enum Language {
 }
 
 export const Prompt =
-  'First summarise the story of the following into a short problem statement(just focus on mathematical part while summarizing, ignore the proper nouns and story around them).\
+  'Imagine you are a mathematician and a competitive programmer. First summarise the story of the following into a short problem statement(just focus on mathematical part while summarizing, ignore the proper nouns and story around them).\
  Now suggest suitable algorithm for this problem.\
  Make sure you try to solve it in the best possible time complexity(ie most efficient).\
  Next, for this time complexity calculate number of operations needed to compute the result at maximum values of all the variables in problem statement.\
