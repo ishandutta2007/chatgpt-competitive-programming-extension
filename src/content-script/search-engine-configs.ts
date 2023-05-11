@@ -137,4 +137,12 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['div[class="v-list-item__content"]'],
     appendContainerQuery: [],
   },
+  pramp: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: ['div[class="nav-tab-panel nav-tab-panel_active nav-tab-panel_markdown"]'],
+    sidebarContainerQuery: [
+      'div[class="nav-tab-panel nav-tab-panel_active nav-tab-panel_markdown"] > h2',
+    ],
+    appendContainerQuery: [],
+  },
 }

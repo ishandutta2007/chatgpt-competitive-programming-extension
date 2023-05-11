@@ -43,7 +43,8 @@
         "https://toph.co/p/*",
         "https://my.newtonschool.co/playground/code/*",
         "https://cses.fi/*",
-        "https://codedrills.io/problems/*"
+        "https://codedrills.io/problems/*",
+        "https://www.pramp.com/*"
       ],
       "js": ["content-script.js"],
       "css": ["content-script.css"]
