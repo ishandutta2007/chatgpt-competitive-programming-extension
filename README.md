@@ -26,7 +26,7 @@
 * "https://lightoj.com/problem/*",
 * "https://toph.co/p/*",
 * "https://cses.fi/*",
-* "https://www.pramp.com/*"
+* "https://www.pramp.com/*",
 * "https://www.interviewbit.com/problems/*",
 
 
@@ -36,7 +36,8 @@
 * "https://www.codechef.com/*",
 * "https://my.newtonschool.co/playground/code/*"
 * "https://geeksforgeeks.org",
-* "https://codedrills.io/problems/*"
+* "https://codedrills.io/problems/*",
+* "https://www.algoexpert.io/questions/*"
 
 ### TODO
 
@@ -65,6 +66,9 @@ payload: {
 GET https://www.codechef.com/api/contests/PRACTICE/problems/FLOW001
 
 ........
+POST https://prod.api.algoexpert.io/api/problems/v1/algoexpert/coding-questions/get
+
+......
 
 ## Custom Prompt
 You can change the prompt.

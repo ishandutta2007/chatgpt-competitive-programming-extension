@@ -44,7 +44,8 @@
         "https://my.newtonschool.co/playground/code/*",
         "https://cses.fi/*",
         "https://codedrills.io/problems/*",
-        "https://www.pramp.com/*"
+        "https://www.pramp.com/*",
+        "https://www.algoexpert.io/questions/*"
       ],
       "js": ["content-script.js"],
       "css": ["content-script.css"]

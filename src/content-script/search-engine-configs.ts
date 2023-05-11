@@ -145,4 +145,14 @@ export const config: Record<string, SearchEngine> = {
     ],
     appendContainerQuery: [],
   },
+  algoexpert: {
+    inputQuery: ["input[name='query']"],
+    bodyQuery: [
+      '#root > div > div > div > div > div:nth-child(1) > div > div:nth-child(1) > div > div > div:nth-child(2) > div > div.ae-workspace-dark > div',
+    ],
+    sidebarContainerQuery: [
+      'div[class="vertical reflex-container"] > div[class="horizontal reflex-element"]',
+    ],
+    appendContainerQuery: [],
+  },
 }
