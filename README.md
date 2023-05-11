@@ -42,7 +42,9 @@
 
 For above sites most probably we have to incercept graphql query
 
+
 POST https://leetcode.com/graphql/
+
 payload: {
     "query": "
         query questionContent($titleSlug: String!) {
@@ -57,9 +59,12 @@ payload: {
     },
     "operationName": "questionContent"
 }
-========
+
+........
+
 GET https://www.codechef.com/api/contests/PRACTICE/problems/FLOW001
-========
+
+........
 
 ## Custom Prompt
 You can change the prompt.
