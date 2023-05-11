@@ -38,6 +38,26 @@
 * "https://geeksforgeeks.org",
 * "https://codedrills.io/problems/*"
 
+### TODO
+
+For above sites most probably we have to incercept graphql query
+
+POST https://leetcode.com/graphql/
+payload: {
+    "query": "
+        query questionContent($titleSlug: String!) {
+            question(titleSlug: $titleSlug) {
+                content
+                mysqlSchemas
+            }
+        }
+    ",
+    "variables": {
+        "titleSlug": "letter-combinations-of-a-phone-number"
+    },
+    "operationName": "questionContent"
+}
+
 
 ## Custom Prompt
 You can change the prompt.
