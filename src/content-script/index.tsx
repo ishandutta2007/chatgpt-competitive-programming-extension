@@ -86,6 +86,10 @@ async function run() {
   if (siteConfig.bodyQuery) {
     const bodyElement = getPossibleElementByQuerySelector(siteConfig.bodyQuery)
     console.debug('bodyElement', bodyElement)
+    if (bodyElement && siteName == 'interviewbit') {
+      console.debug('bodyElement.content', bodyElement.content)
+      bodyElement.textContent = bodyElement.content
+    }
 
     if (bodyElement && bodyElement.textContent) {
       const bodyInnerText = bodyElement.textContent.trim().replace(/\s+/g, ' ').substring(0, 1500)

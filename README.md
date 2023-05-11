@@ -27,13 +27,13 @@
 * "https://toph.co/p/*",
 * "https://cses.fi/*",
 * "https://www.pramp.com/*"
+* "https://www.interviewbit.com/problems/*",
 
 
 (To be fixed:)
 
 * "https://leetcode.com/*",
 * "https://www.codechef.com/*",
-* "https://www.interviewbit.com/problems/*",
 * "https://my.newtonschool.co/playground/code/*"
 * "https://geeksforgeeks.org",
 * "https://codedrills.io/problems/*"
@@ -57,7 +57,9 @@ payload: {
     },
     "operationName": "questionContent"
 }
-
+========
+GET https://www.codechef.com/api/contests/PRACTICE/problems/FLOW001
+========
 
 ## Custom Prompt
 You can change the prompt.

@@ -51,8 +51,8 @@ export const config: Record<string, SearchEngine> = {
   },
   interviewbit: {
     inputQuery: ["input[name='query']"],
-    bodyQuery: ['#problem_description_markdown_content_value'],
-    sidebarContainerQuery: ['div[class="p-similar-questions"]'],
+    bodyQuery: ['head > meta[name="description"]'],
+    sidebarContainerQuery: ['div[class="interviewbit"]'],
     appendContainerQuery: [],
   },
   atcoder: {

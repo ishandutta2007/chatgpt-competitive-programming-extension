@@ -1,6 +1,11 @@
 @import 'light.scss';
 @import 'dark.scss';
 
+// Hack for interviewbit
+html.cannot-touch, html.cannot-touch body, html.cannot-touch #root, html.cannot-touch .react-root, html.cannot-touch .react-root .interviewbit{
+    height: 400vh!important;
+}
+
 .chat-gpt-container {
   margin-bottom: 30px;
   flex-basis: 0;
