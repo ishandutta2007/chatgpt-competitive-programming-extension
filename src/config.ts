@@ -35,7 +35,8 @@ export enum Language {
 export const Prompt =
   'Imagine you are a mathematician and a competitive programmer. First summarise the story of the following into a short problem statement(just focus on mathematical part while summarizing, ignore the proper nouns and story around them).\
  Next, suggest 3 different algorithms for this problem in decreasing order of time complexity.\
- Next, for each of the 3 algorithms calculate number of operations needed to compute the result at maximum values of all the variables in problem statement.\
+ Next, for each of the 3 algorithms calculate numeric value of the number of operations needed to compute the result at maximum values of all the variables in problem statement.\
+ Next, for each of the 3 algorithms mention the space complexity as well.\
  Next, suggest 3-4 general problems which makes use of similar concept.\
  Next, suggest 3-4 similar problems on any competitive programming platforms.\
  Next, suggest 3-4 relevant papers(with publishing year) related to this algorithm.\
