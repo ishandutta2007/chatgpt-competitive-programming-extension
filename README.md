@@ -29,14 +29,14 @@
 * "https://www.pramp.com/*",
 * "https://www.interviewbit.com/problems/*",
 * "https://leetcode.com/*",
+* "https://www.codechef.com/*",
 
 (To be fixed:)
 
-* "https://www.codechef.com/*",
-* "https://my.newtonschool.co/playground/code/*"
+* "https://my.newtonschool.co/playground/code/*",
 * "https://geeksforgeeks.org",
 * "https://codedrills.io/problems/*",
-* "https://www.algoexpert.io/questions/*"
+* "https://www.algoexpert.io/questions/*",
 
 ### TODO
 

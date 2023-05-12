@@ -23,6 +23,12 @@ body.chakra-ui-light .overflow-y-hidden {
 }
 // End of Hack for leetcode
 
+// Hack for codechef
+#problem-statement, #gpt-answer.markdown-body.gpt-markdown , #gpt-answer.markdown-body.gpt-markdown *{
+  color: #24292F!important;
+}
+// End of Hack for codechef
+
 .chat-gpt-container {
   margin-bottom: 30px;
   flex-basis: 0;

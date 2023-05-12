@@ -40,7 +40,7 @@ export const config: Record<string, SearchEngine> = {
   codechef: {
     inputQuery: ["input[name='query']"],
     bodyQuery: ['#problem-statement'],
-    sidebarContainerQuery: ['#vertical-tab-panel-1'],
+    sidebarContainerQuery: ['#problem-statement'],
     appendContainerQuery: [],
   },
   poj: {

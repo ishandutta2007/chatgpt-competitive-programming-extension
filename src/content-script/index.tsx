@@ -143,9 +143,6 @@ async function run() {
       console.log('Body: ' + bodyInnerText)
       const userConfig = await getUserConfig()
 
-      // const found = userConfig.promptOverrides.find(
-      //   (override) => new URL(override.site).hostname === location.hostname,
-      // )
       const found = true
       const question = found?.prompt ?? userConfig.prompt
       const promptSource = found?.site ?? 'default'
@@ -162,3 +159,49 @@ run()
 if (siteConfig.watchRouteChange) {
   siteConfig.watchRouteChange(run)
 }
+
+async function run_again() {
+  console.debug('Try again to Mount ChatGPT on', siteName)
+  if (siteConfig.bodyQuery) {
+    const bodyElement = getPossibleElementByQuerySelector(siteConfig.bodyQuery)
+    console.debug('bodyElement again', bodyElement)
+    if (bodyElement && siteName == 'codechef') {
+      let splits = location.href.split('/')
+      splits = splits.filter((e) => (e === 0 ? true : e))
+      const codechef_url =
+        'https://www.codechef.com/api/contests/PRACTICE/problems/' + splits[splits.length - 1]
+      const response = await fetch(codechef_url)
+      if (!response.ok) {
+        console.log('ERROR GET REQ')
+      } else {
+        const CCresponseBody = await response.json()
+        if (CCresponseBody !== null) {
+          // We actually dont need to do anything with the data quetrying again has populated the doms which empty earlier
+          /*
+           let originalBody = CCresponseBody["body"].replace(/\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/g,'');
+           console.log("responseBody:", originalBody);
+          */
+        }
+      }
+    }
+    if (bodyElement && bodyElement.textContent) {
+      const bodyInnerText = bodyElement.textContent.trim().replace(/\s+/g, ' ').substring(0, 1500)
+      console.log('Body: ' + bodyInnerText)
+      const userConfig = await getUserConfig()
+
+      const found = true
+      const question = found?.prompt ?? userConfig.prompt
+      const promptSource = found?.site ?? 'default'
+
+      console.debug('question(raw):', question)
+      console.debug('bodyInnerText:', bodyInnerText)
+      mount(question + bodyInnerText, promptSource, siteConfig)
+    }
+    return true
+  }
+  return false
+}
+
+window.setTimeout(function () {
+  run_again()
+}, 6000)
