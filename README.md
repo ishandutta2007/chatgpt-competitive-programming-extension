@@ -28,11 +28,10 @@
 * "https://cses.fi/*",
 * "https://www.pramp.com/*",
 * "https://www.interviewbit.com/problems/*",
-
+* "https://leetcode.com/*",
 
 (To be fixed:)
 
-* "https://leetcode.com/*",
 * "https://www.codechef.com/*",
 * "https://my.newtonschool.co/playground/code/*"
 * "https://geeksforgeeks.org",

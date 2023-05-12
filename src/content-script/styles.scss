@@ -3,8 +3,25 @@
 
 // Hack for interviewbit
 html.cannot-touch, html.cannot-touch body, html.cannot-touch #root, html.cannot-touch .react-root, html.cannot-touch .react-root .interviewbit{
-    height: 400vh!important;
+    height: 450vh!important;
 }
+// End of Hack for interviewbit
+
+// Hack for leetcode
+body.chakra-ui-light, body.chakra-ui-light div#__next, body.chakra-ui-light div#__next div#qd-content, 
+body.chakra-ui-light .ant-menu-vertical-left.ant-menu-sub, 
+body.chakra-ui-light .ant-menu-vertical-right.ant-menu-sub, body.chakra-ui-light .ant-menu-vertical.ant-menu-sub, body.chakra-ui-light .ant-table-filter-dropdown-submenu>ul {
+  height: 450vh!important;
+}
+
+body.chakra-ui-light .ssg__qd-splitter-secondary-w, body.chakra-ui-light .ssg__qd-splitter-primary-w {
+  width: 30%!important;
+}
+
+body.chakra-ui-light .overflow-y-hidden {
+  overflow-y: visible;
+}
+// End of Hack for leetcode
 
 .chat-gpt-container {
   margin-bottom: 30px;

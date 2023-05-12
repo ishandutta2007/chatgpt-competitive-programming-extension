@@ -91,6 +91,53 @@ async function run() {
       bodyElement.textContent = bodyElement.content
     }
 
+    if (bodyElement && siteName == 'leetcode') {
+      const leetcode_url = 'https://leetcode.com/graphql/'
+      interface MyVariables {
+        titleSlug: string
+      }
+      interface MyData {
+        operation_name: string
+        query: string
+        variables: MyVariables
+      }
+
+      let splits = location.href.split('/')
+      splits = splits.filter((e) => (e === 0 ? true : e))
+      const titleSlug = splits[splits.length - 1]
+
+      const data: MyData = {
+        operation_name: 'questionContent',
+        query:
+          '\n    query questionContent($titleSlug: String!) {\n  question(titleSlug: $titleSlug) {\n    content\n    mysqlSchemas\n  }\n}\n    ',
+        variables: {
+          titleSlug: 'split-the-array-to-make-coprime-products',
+        },
+      }
+
+      console.log('data:', data)
+      const response = await fetch(leetcode_url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (!response.ok) {
+        console.log('ERROR POST REQ')
+      } else {
+        const responseBody = await response.arrayBuffer()
+        if (responseBody !== null) {
+          // We actually dont need to do anything with the data quetrying again has populated the doms which empty earlier
+          /*
+            const asString = new TextDecoder("utf-8").decode(responseBody);
+            const asJSON = JSON.parse(asString);
+          */
+        }
+      }
+    }
+
     if (bodyElement && bodyElement.textContent) {
       const bodyInnerText = bodyElement.textContent.trim().replace(/\s+/g, ' ').substring(0, 1500)
       console.log('Body: ' + bodyInnerText)
