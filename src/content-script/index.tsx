@@ -203,5 +203,5 @@ async function run_again() {
 }
 
 window.setTimeout(function () {
-  run_again()
+  if (siteName == 'codechef') run_again()
 }, 6000)
