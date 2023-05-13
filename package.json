@@ -1,6 +1,6 @@
 {
   "name": "chat-gpt-google-extension",
-  "author": "wong2",
+  "author": "ishandutta2007",
   "scripts": {
     "build": "node build.mjs",
     "lint": "eslint --ext .js,.mjs,.jsx .",
@@ -37,6 +37,7 @@
     "archiver": "^5.3.1",
     "autoprefixer": "^10.4.13",
     "chokidar-cli": "^3.0.0",
+    "cws-publish": "^2.1.1",
     "dotenv": "^16.0.3",
     "esbuild": "^0.17.4",
     "esbuild-style-plugin": "^1.6.1",
