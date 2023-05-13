@@ -1,0 +1,34 @@
+name: Build and Deploy
+run-name: ${{ github.actor }} is testing GitHub Actions
+on: [push]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      ONESIGNAL_APP_ID: "mytestid"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build to zip
+        run: npm run build
+
+      - name: Upload to Chrome Web Store
+        uses: mobilefirstllc/cws-publish@latest
+        with:
+          action: 'upload'  # one of: upload, publish, testers
+          client_id: ${{ secrets.CLIENT }}
+          client_secret: ${{ secrets.SECRET }}
+          refresh_token: ${{ secrets.TOKEN }}
+          extension_id: '32-CHAR EXTENSION ID' 
+          zip_file: 'ZIP FILE PATH'
