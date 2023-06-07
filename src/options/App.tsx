@@ -82,7 +82,7 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
             Feedback
           </a>
           <a
-            href="https://github.com/ishandutta2007/chatgpt-competitive-programming-stackexchange-extension"
+            href="https://github.com/ishandutta2007/chatgpt-competitive-programming-extension"
             target="_blank"
             rel="noreferrer"
           >
