@@ -1,7 +1,10 @@
+import dayjs from 'dayjs'
 import ExpiryMap from 'expiry-map'
 import { v4 as uuidv4 } from 'uuid'
+import { ADAY, APPSHORTNAME, HALFHOUR } from '../../utils/consts'
 import { fetchSSE } from '../fetch-sse'
 import { GenerateAnswerParams, Provider } from '../types'
+dayjs().format()
 
 async function request(token: string, method: string, path: string, data?: unknown) {
   return fetch(`https://chat.openai.com/backend-api${path}`, {
@@ -14,6 +17,34 @@ async function request(token: string, method: string, path: string, data?: unkno
   })
 }
 
+async function request_new(
+  token: string,
+  method: string,
+  path: string,
+  data?: unknown,
+  callback?: unknown,
+) {
+  return fetch(`https://chat.openai.com/backend-api${path}`, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: data === undefined ? undefined : JSON.stringify(data),
+  })
+    .then(function (response) {
+      console.log('fetch', token != null, method, path, 'response', response)
+      return response.json()
+    })
+    .then(function (data) {
+      console.log('response data', data)
+      if (callback) callback(token, data)
+    })
+    .catch((error) => {
+      console.error('fetch', token, method, path, 'error', error)
+    })
+}
+
 export async function sendMessageFeedback(token: string, data: unknown) {
   await request(token, 'POST', '/conversation/message_feedback', data)
 }
@@ -24,6 +55,61 @@ export async function setConversationProperty(
   propertyObject: object,
 ) {
   await request(token, 'PATCH', `/conversation/${conversationId}`, propertyObject)
+}
+
+const browsertabIdConversationIdMap = new Map()
+const windowIdConversationIdMap = new Map()
+
+function deleteRecentConversations(token, data) {
+  const now = dayjs()
+  const startTime = dayjs(performance.timeOrigin)
+  console.log('startTime', startTime)
+  const convs = data.items
+  console.log('convs', convs)
+  for (let i = 0; i < convs.length; i++) {
+    const conv_i_time = dayjs(convs[i].create_time)
+    console.log(
+      'conv' + i,
+      convs[i].id,
+      conv_i_time,
+      conv_i_time - startTime,
+      now - conv_i_time,
+      now - conv_i_time < ADAY,
+    )
+    if (
+      HALFHOUR < now - conv_i_time &&
+      now - conv_i_time < ADAY &&
+      convs[i].title.indexOf(APPSHORTNAME + ':') != -1
+    ) {
+      setTimeout(function () {
+        console.log('Deleting', token != null, convs[i].id)
+        setConversationProperty(token, convs[i].id, { is_visible: false })
+        const cloneBTCMap = new Map(browsertabIdConversationIdMap)
+        cloneBTCMap.forEach((ConversationId, tabId, map) => {
+          console.log('Looking for', ConversationId, tabId, 'in', map)
+          if (ConversationId == convs[i].id) {
+            console.log('Deleting ', ConversationId, tabId, 'from', map)
+            browsertabIdConversationIdMap.delete(tabid)
+            console.log(
+              'browsertabIdConversationIdMap after Deleting ',
+              browsertabIdConversationIdMap,
+            )
+          }
+        })
+        const cloneWCMap = new Map(windowIdConversationIdMap)
+        cloneWCMap.forEach((conversationIdsConcatinated, windowId, map) => {
+          console.log('Looking for', conversationIdsConcatinated, windowId, 'in', map)
+          if (conversationIdsConcatinated.indexOf(convs[i].id) != -1) {
+            console.log('Deleting ', convs[i].id, windowId, 'from', map)
+            conversationIdsConcatinated = conversationIdsConcatinated.replace(convs[i].id, '')
+            conversationIdsConcatinated = conversationIdsConcatinated.replace(',,', ',')
+            windowIdConversationIdMap.set(windowid, conversationIdsConcatinated)
+            console.log('windowIdConversationIdMap after Deleting ', windowIdConversationIdMap)
+          }
+        })
+      }, i * 1000)
+    }
+  }
 }
 
 const KEY_ACCESS_TOKEN = 'accessToken'
@@ -49,6 +135,14 @@ export async function getChatGPTAccessToken(): Promise<string> {
 export class ChatGPTProvider implements Provider {
   constructor(private token: string) {
     this.token = token
+    //Brute:
+    request_new(
+      token,
+      'GET',
+      '/conversations?offset=0&limit=100&order=updated',
+      undefined,
+      deleteRecentConversations,
+    )
   }
 
   private async fetchModels(): Promise<
@@ -71,14 +165,43 @@ export class ChatGPTProvider implements Provider {
   async generateAnswer(params: GenerateAnswerParams) {
     let conversationId: string | undefined
 
+    const countWords = (text) => {
+      return text.trim().split(/\s+/).length
+    }
+
+    const getConversationTitle = (bigtext: string) => {
+      let ret = bigtext.split('\n', 1)[0]
+      console.log('ret', ret)
+      try {
+        ret = ret.split('of the problem:')[1]
+      } catch (e) {
+        console.log(e)
+      }
+      ret = ret.split('.', 1)[0]
+      // console.log('ret',ret)
+      // try {
+      //   ret = APPSHORTNAME + ':' + ret.split(':')[1].trim()
+      // } catch (e) {
+      //   console.log(e)
+      //   ret = APPSHORTNAME + ':' + ret.trim().slice(0, 8) + '..'
+      // }
+      console.log('ret', ret)
+      return APPSHORTNAME + ':' + ret
+    }
+
+    const renameConversationTitle = (convId: string) => {
+      const titl: string = getConversationTitle(params.prompt)
+      console.log('renameConversationTitle:', this.token, convId, titl)
+      setConversationProperty(this.token, convId, { title: titl })
+    }
     const cleanup = () => {
       if (conversationId) {
-        setConversationProperty(this.token, conversationId, { is_visible: false })
+        // setConversationProperty(this.token, conversationId, { is_visible: false })
       }
     }
 
     const modelName = await this.getModelName()
-    console.log('Using model:', modelName, params.conversationId, params.parentMessageId)
+    console.debug('Using model:', modelName)
 
     await fetchSSE('https://chat.openai.com/backend-api/conversation', {
       method: 'POST',
@@ -114,21 +237,24 @@ export class ChatGPTProvider implements Provider {
         try {
           data = JSON.parse(message)
         } catch (err) {
-          if (new Date(message) !== 'Invalid Date' && !isNaN(new Date(message)))
-            console.debug('This is known issue')
-          else console.error(err)
+          console.error(err)
           return
         }
-        const text = data.message?.content?.parts?.[0] + '✏'
+        const text = data.message?.content?.parts?.[0]
         if (text) {
+          if (countWords(text) == 1 && data.message?.author?.role == 'assistant') {
+            if (params.prompt.indexOf('of the problem:') !== -1) {
+              renameConversationTitle(data.conversation_id)
+            }
+          }
           conversationId = data.conversation_id
           params.onEvent({
             type: 'answer',
             data: {
               text,
               messageId: data.message.id,
-              conversationId: data.conversation_id,
               parentMessageId: data.parent_message_id,
+              conversationId: data.conversation_id,
             },
           })
         }
