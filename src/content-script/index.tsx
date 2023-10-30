@@ -2,6 +2,7 @@ import { render } from 'preact'
 import '../base.css'
 import { getUserConfig, Theme } from '../config'
 import { detectSystemColorScheme } from '../utils'
+import { getArkoseToken } from './arkose'
 import ChatGPTContainer from './ChatGPTContainer'
 import { config, SearchEngine } from './search-engine-configs'
 import './styles.scss'
@@ -37,10 +38,12 @@ async function mount(question: string, promptSource: string, siteConfig: SearchE
     }
   }
   console.debug('question:', question)
+  const arkoseToken = await getArkoseToken()
 
   render(
     <ChatGPTContainer
       question={question}
+      arkoseToken={arkoseToken}
       promptSource={promptSource}
       triggerMode={userConfig.triggerMode || 'always'}
     />,

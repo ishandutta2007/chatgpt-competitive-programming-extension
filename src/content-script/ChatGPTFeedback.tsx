@@ -5,6 +5,7 @@ import Browser from 'webextension-polyfill'
 
 interface Props {
   messageId: string
+  arkoseToken: string
   conversationId: string
   latestAnswerText: string
 }
@@ -23,6 +24,7 @@ function ChatGPTFeedback(props: Props) {
       data: {
         conversation_id: props.conversationId,
         message_id: props.messageId,
+        arkose_token: props.arkoseToken,
         rating: 'thumbsUp',
       },
     })
@@ -38,6 +40,7 @@ function ChatGPTFeedback(props: Props) {
       data: {
         conversation_id: props.conversationId,
         message_id: props.messageId,
+        arkose_token: props.arkoseToken,
         rating: 'thumbsDown',
         text: '',
         tags: [],

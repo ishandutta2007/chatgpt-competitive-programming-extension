@@ -9,6 +9,7 @@ interface Props {
   question: string
   promptSource: string
   triggerMode: TriggerMode
+  arkoseToken: string
 }
 
 function ChatGPTContainer(props: Props) {
@@ -23,6 +24,7 @@ function ChatGPTContainer(props: Props) {
       <div className="chat-gpt-card">
         <ChatGPTCard
           question={props.question}
+          arkoseToken={props.arkoseToken}
           promptSource={props.promptSource}
           triggerMode={props.triggerMode}
           onStatusChange={setQueryStatus}
