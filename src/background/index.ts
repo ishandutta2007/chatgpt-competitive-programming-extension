@@ -4,6 +4,8 @@ import { ChatGPTProvider, getChatGPTAccessToken, sendMessageFeedback } from './p
 import { OpenAIProvider } from './providers/openai'
 import { Provider } from './types'
 
+const CPGPT_UNINSTALL_TYPEFORM_URL = 'https://survey.typeform.com/to/hfCemvjy'
+
 async function generateAnswers(
   port: Browser.Runtime.Port,
   question: string,
@@ -80,3 +82,5 @@ Browser.runtime.onInstalled.addListener((details) => {
     Browser.runtime.openOptionsPage()
   }
 })
+
+Browser.runtime.setUninstallURL(CPGPT_UNINSTALL_TYPEFORM_URL)
