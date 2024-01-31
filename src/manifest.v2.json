@@ -51,10 +51,13 @@
       "css": ["content-script.css"]
     }
   ]
+}
+
+
+
   // TODO : deliberately failing dynamic file loads to avoid captcha (https://stackoverflow.com/a/63620236/865220)
   // "web_accessible_resources": [
   //   "/js/v2/35536E1E-65B4-4D96-9D97-6ADB7EFF8147/api.js",
   //   "/js/setuparkose.js",
   //   "/js/callgeneratearkose.js"
   // ]
-}
