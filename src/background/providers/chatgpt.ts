@@ -1,6 +1,11 @@
+import { Buffer } from 'buffer'
 import dayjs from 'dayjs'
+import { createParser } from 'eventsource-parser'
 import ExpiryMap from 'expiry-map'
 import { v4 as uuidv4 } from 'uuid'
+import Browser from 'webextension-polyfill'
+import WebSocketAsPromised from 'websocket-as-promised'
+import { parseSSEResponse, parseSSEResponse3 } from '~utils/sse'
 import { ADAY, APPSHORTNAME, HALFHOUR } from '../../utils/consts'
 import { fetchSSE } from '../fetch-sse'
 import { GenerateAnswerParams, Provider } from '../types'
@@ -15,6 +20,33 @@ async function request(token: string, method: string, path: string, data?: unkno
     },
     body: data === undefined ? undefined : JSON.stringify(data),
   })
+}
+
+function removeCitations(text: string) {
+  return text.replaceAll(/\u3010\d+\u2020source\u3011/g, '')
+}
+
+const getConversationTitle = (bigtext: string) => {
+  let ret = bigtext.split('\n', 1)[0]
+  ret = ret.split('.', 1)[0]
+  ret = APPSHORTNAME + ':' + ret.split(':')[1].trim()
+  console.log('getConversationTitle:', ret)
+  return ret
+}
+
+const countWords = (text) => {
+  return text.trim().split(/\s+/).length
+}
+
+async function getChatgptwssIsOpenFlag() {
+  const { chatgptwssIsOpenFlag = false } = await Browser.storage.sync.get('chatgptwssIsOpenFlag')
+  return chatgptwssIsOpenFlag
+}
+
+async function setChatgptwssIsOpenFlag(isOpen: boolean) {
+  const { chatgptwssIsOpenFlag = false } = await Browser.storage.sync.get('chatgptwssIsOpenFlag')
+  Browser.storage.sync.set({ chatgptwssIsOpenFlag: isOpen })
+  return chatgptwssIsOpenFlag
 }
 
 async function request_new(
@@ -162,7 +194,182 @@ export class ChatGPTProvider implements Provider {
     }
   }
 
+  private renameConversationTitle(convId: string, params: SendMessageParams) {
+    const titl: string = getConversationTitle(params.prompt)
+    console.log('renameConversationTitle:', this.token, convId, titl)
+    setConversationProperty(this.token, convId, { title: titl })
+  }
+
+  async getChatRequirementsToken(params: SendMessageParams) {
+    const resp = await fetch('https://chat.openai.com/backend-api/sentinel/chat-requirements', {
+      method: 'POST',
+      signal: params.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.token}`,
+        conversation_mode_kind: 'primary_assistant',
+      },
+      body: JSON.stringify({
+        conversation_mode_kind: 'primary_assistant',
+      }),
+    })
+    console.log('getChatRequirements:resp:', resp)
+    let retToken = ''
+    await parseSSEResponse3(resp, (message: any) => {
+      console.log('getChatRequirements:message:', message)
+      retToken = message.token
+    })
+    console.log('retToken:', retToken)
+    return retToken
+  }
+
+  async registerWSS(params: GenerateAnswerParams) {
+    const resp = await fetch('https://chat.openai.com/backend-api/register-websocket', {
+      method: 'POST',
+      signal: params.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.token}`,
+      },
+      body: void 0,
+    })
+    return resp
+  }
+
+  async setupWSS(params: GenerateAnswerParams, regResp: any) {
+    console.log('ChatGPTProvider:setupWSS:regResp', regResp)
+    let jj
+    await parseSSEResponse(regResp, (message) => {
+      console.log('ChatGPTProvider:setupWSS:parseSSEResponse:message', message)
+      jj = JSON.parse(message)
+    })
+    console.log('ChatGPTProvider:jj', jj)
+    if (jj) {
+      const wsAddress = jj['wss_url']
+      const wsp: WebSocketAsPromised = new WebSocketAsPromised(wsAddress, {
+        createWebSocket: (url) => {
+          const ws = new WebSocket(wsAddress, [
+            'Sec-Websocket-Protocol',
+            'json.reliable.webpubsub.azure.v1',
+          ])
+          ws.binaryType = 'arraybuffer'
+          return ws
+        },
+      })
+      console.log('ChatGPTProvider:setupWebsocket:wsp', wsp)
+
+      const openListener = async () => {
+        console.log('ChatGPTProvider:setupWSSopenListener::wsp.onOpen')
+        await setChatgptwssIsOpenFlag(true)
+      }
+
+      let next_check_seqid = Math.round(Math.random() * 50)
+      let lastSendTextLen = 0
+      const messageListener = (message: any) => {
+        // console.log('ChatGPTProvider:setupWebsocket:wsp.onMessage:', message)
+        const jjws = JSON.parse(message)
+        console.log('ChatGPTProvider:setupWSS:messageListener:jjws:', jjws)
+        const rawMessage = jjws['data'] ? jjws['data']['body'] : ''
+        console.log('ChatGPTProvider:setupWSS:wsp.onMessage:rawMessage:', rawMessage)
+        const b64decodedMessage = Buffer.from(rawMessage, 'base64')
+        const finalMessageStr = b64decodedMessage.toString()
+        console.log('ChatGPTProvider:setupWebsocket:wsp.onMessage:finalMessage:', finalMessageStr)
+
+        const parser = createParser((parent_message) => {
+          console.log('ChatGPTProvider:setupWSS:createParser:parent_message', parent_message) //event=`{data:'{}',event:undefine,id=undefined,type='event'}`
+          let data
+          try {
+            if ((parent_message['data' as keyof typeof parent_message] as string) === '[DONE]') {
+              console.log('ChatGPTProvider:setupWSS:createParser:returning DONE to frontend2')
+              params.onEvent({ type: 'done' })
+              wsp.close()
+              return
+            } else if (parent_message['data' as keyof typeof parent_message]) {
+              data = JSON.parse(parent_message['data' as keyof typeof parent_message])
+              console.log('ChatGPTProvider:setupWSS:createParser:data', data)
+            }
+          } catch (err) {
+            console.log('ChatGPTProvider:setupWSS:createParser:Error', err)
+            params.onEvent({ type: 'error', message: (err as any)?.message })
+            wsp.close()
+            return
+          }
+          const content = data?.message?.content as ResponseContent | undefined
+          if (!content) {
+            console.log('ChatGPTProvider:returning DONE to frontend3')
+            params.onEvent({ type: 'done' })
+            wsp.close()
+            return
+          }
+          let text: string
+          if (content.content_type === 'text') {
+            text = content.parts[0]
+            // text = removeCitations(text)
+          } else if (content.content_type === 'code') {
+            text = '_' + content.text + '_'
+          } else {
+            console.log('ChatGPTProvider:returning DONE to frontend4')
+            params.onEvent({ type: 'done' })
+            wsp.close()
+            return
+          }
+          if (text) {
+            if (data.message?.author?.role == 'assistant') {
+              if (params.prompt.indexOf('search query:') !== -1) {
+                // this.renameConversationTitle(data.conversation_id, params)
+              }
+              console.debug(
+                'ChatGPTProvider:generateAnswerBySSE:answer:text(setupWSS:messageListener):',
+                text,
+              )
+              params.onEvent({
+                type: 'answer',
+                data: {
+                  text,
+                  messageId: data.message.id,
+                  parentMessageId: data.parent_message_id,
+                  conversationId: data.conversation_id,
+                },
+              })
+            }
+          }
+        })
+        // if (finalMessageStr.length - lastSendTextLen > 40)
+        parser.feed(finalMessageStr)
+        lastSendTextLen = finalMessageStr.length
+
+        const sequenceId = jjws['sequenceId']
+        console.log('ChatGPTProvider:doSendMessage:sequenceId:', sequenceId)
+        if (sequenceId === next_check_seqid) {
+          const t = {
+            type: 'sequenceAck',
+            sequenceId: next_check_seqid,
+          }
+          if (wsp.isOpened) {
+            wsp.send(JSON.stringify(t))
+            next_check_seqid += Math.round(Math.random() * 50)
+          } else {
+            console.log('ChatGPTProvider:doSendMessage:WebSocket is not open:wsp, t:', wsp, t)
+          }
+        }
+      }
+      wsp.removeAllListeners()
+      wsp.close()
+      wsp.onOpen.addListener(openListener)
+      wsp.onMessage.addListener(messageListener)
+      wsp.onClose.removeListener(messageListener)
+      wsp.open().catch(async (e) => {
+        console.log('ChatGPTProvider:doSendMessage:open:showError:Error caught while opening ws', e)
+        wsp.removeAllListeners()
+        wsp.close()
+        await setChatgptwssIsOpenFlag(false)
+        params.onEvent({ type: 'error', message: (e as any)?.message })
+      })
+    }
+  }
+
   async generateAnswer(params: GenerateAnswerParams) {
+    console.log('chatgpt', params.arkoseToken)
     let conversationId: string | undefined
 
     const countWords = (text) => {
@@ -171,36 +378,23 @@ export class ChatGPTProvider implements Provider {
 
     const getConversationTitle = (bigtext: string) => {
       let ret = bigtext.split('\n', 1)[0]
-      console.log('ret', ret)
-      try {
-        ret = ret.split('of the problem:')[1]
-      } catch (e) {
-        console.log(e)
-      }
       ret = ret.split('.', 1)[0]
-      // console.log('ret',ret)
-      // try {
-      //   ret = APPSHORTNAME + ':' + ret.split(':')[1].trim()
-      // } catch (e) {
-      //   console.log(e)
-      //   ret = APPSHORTNAME + ':' + ret.trim().slice(0, 8) + '..'
-      // }
-      console.log('ret', ret)
-      return APPSHORTNAME + ':' + ret
+      ret = APPSHORTNAME + ':' + ret.split(':')[1].trim()
+      console.log('getConversationTitle:', ret)
+      return ret
     }
 
-    const renameConversationTitle = (convId: string) => {
-      const titl: string = getConversationTitle(params.prompt)
-      console.log('renameConversationTitle:', this.token, convId, titl)
-      setConversationProperty(this.token, convId, { title: titl })
-    }
     const cleanup = () => {
       if (conversationId) {
         // setConversationProperty(this.token, conversationId, { is_visible: false })
       }
     }
 
+    const regResp = await this.registerWSS(params)
+    await this.setupWSS(params, regResp) // Since params change WSS have to be setup up every time
+
     const modelName = await this.getModelName()
+    const chatRequirementsToken = await this.getChatRequirementsToken(params)
     console.debug('Using model:', modelName)
 
     await fetchSSE('https://chat.openai.com/backend-api/conversation', {
@@ -209,6 +403,8 @@ export class ChatGPTProvider implements Provider {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.token}`,
+        'Openai-Sentinel-Arkose-Token': params.arkoseToken,
+        'Openai-Sentinel-Chat-Requirements-Token': chatRequirementsToken,
       },
       body: JSON.stringify({
         action: 'next',
@@ -226,6 +422,14 @@ export class ChatGPTProvider implements Provider {
         parent_message_id: params.parentMessageId || uuidv4(),
         conversation_id: params.conversationId,
         arkose_token: params.arkoseToken,
+        conversation_mode: {
+          kind: 'primary_assistant',
+        },
+        history_and_training_disabled: !1,
+        force_paragen: !1,
+        force_rate_limit: !1,
+        suggestions: [],
+        // websocket_request_id://TODO:still working without it
       }),
       onMessage(message: string) {
         console.debug('sse message', message)
@@ -243,12 +447,16 @@ export class ChatGPTProvider implements Provider {
         }
         const text = data.message?.content?.parts?.[0]
         if (text) {
-          if (countWords(text) == 1 && data.message?.author?.role == 'assistant') {
-            if (params.prompt.indexOf('of the problem:') !== -1) {
-              renameConversationTitle(data.conversation_id)
+          if (data.message?.author?.role == 'assistant') {
+            if (params.prompt.indexOf('search query:') !== -1) {
+              // this.renameConversationTitle(data.conversation_id)
             }
           }
           conversationId = data.conversation_id
+          console.debug(
+            'ChatGPTProvider:generateAnswer:answer:text(setupWSS:messageListener):',
+            text,
+          )
           params.onEvent({
             type: 'answer',
             data: {

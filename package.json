@@ -28,7 +28,8 @@
     "react-markdown": "^8.0.4",
     "rehype-highlight": "^6.0.0",
     "swr": "^2.0.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "websocket-as-promised": "^2.0.1"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
