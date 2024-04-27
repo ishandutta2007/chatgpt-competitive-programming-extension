@@ -437,6 +437,15 @@ export class ChatGPTProvider implements Provider {
           params.onEvent({ type: 'done' })
           cleanup()
           return
+        } else {
+          try {
+            if (JSON.parse(message).error) {
+              console.error(JSON.parse(message).error)
+              return
+            }
+          } catch (err) {
+            console.log(err)
+          }
         }
         let data
         try {
