@@ -12,7 +12,7 @@ import { GenerateAnswerParams, Provider } from '../types'
 dayjs().format()
 
 async function request(token: string, method: string, path: string, data?: unknown) {
-  return fetch(`https://chat.openai.com/backend-api${path}`, {
+  return fetch(`https://chatgpt.com/backend-api${path}`, {
     method,
     headers: {
       'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ async function request_new(
   data?: unknown,
   callback?: unknown,
 ) {
-  return fetch(`https://chat.openai.com/backend-api${path}`, {
+  return fetch(`https://chatgpt.com/backend-api${path}`, {
     method,
     headers: {
       'Content-Type': 'application/json',
@@ -152,7 +152,7 @@ export async function getChatGPTAccessToken(): Promise<string> {
   if (cache.get(KEY_ACCESS_TOKEN)) {
     return cache.get(KEY_ACCESS_TOKEN)
   }
-  const resp = await fetch('https://chat.openai.com/api/auth/session')
+  const resp = await fetch('https://chatgpt.com/api/auth/session')
   if (resp.status === 403) {
     throw new Error('CLOUDFLARE')
   }
@@ -201,7 +201,7 @@ export class ChatGPTProvider implements Provider {
   }
 
   async getChatRequirementsToken(params: SendMessageParams) {
-    const resp = await fetch('https://chat.openai.com/backend-api/sentinel/chat-requirements', {
+    const resp = await fetch('https://chatgpt.com/backend-api/sentinel/chat-requirements', {
       method: 'POST',
       signal: params.signal,
       headers: {
@@ -224,7 +224,7 @@ export class ChatGPTProvider implements Provider {
   }
 
   async registerWSS(params: GenerateAnswerParams) {
-    const resp = await fetch('https://chat.openai.com/backend-api/register-websocket', {
+    const resp = await fetch('https://chatgpt.com/backend-api/register-websocket', {
       method: 'POST',
       signal: params.signal,
       headers: {
@@ -397,7 +397,7 @@ export class ChatGPTProvider implements Provider {
     const chatRequirementsToken = await this.getChatRequirementsToken(params)
     console.debug('Using model:', modelName)
 
-    await fetchSSE('https://chat.openai.com/backend-api/conversation', {
+    await fetchSSE('https://chatgpt.com/backend-api/conversation', {
       method: 'POST',
       signal: params.signal,
       headers: {

@@ -4,7 +4,7 @@
 // import { GenerateAnswerParams, Provider } from '../types'
 
 // async function request(token: string, method: string, path: string, data?: unknown) {
-//   return fetch(`https://chat.openai.com/backend-api${path}`, {
+//   return fetch(`https://chatgpt.com/backend-api${path}`, {
 //     method,
 //     headers: {
 //       'Content-Type': 'application/json',
@@ -34,7 +34,7 @@
 //   if (cache.get(KEY_ACCESS_TOKEN)) {
 //     return cache.get(KEY_ACCESS_TOKEN)
 //   }
-//   const resp = await fetch('https://chat.openai.com/api/auth/session')
+//   const resp = await fetch('https://chatgpt.com/api/auth/session')
 //   if (resp.status === 403) {
 //     throw new Error('CLOUDFLARE')
 //   }
@@ -80,7 +80,7 @@
 //     const modelName = await this.getModelName()
 //     console.log('Using model:', modelName, params.conversationId, params.parentMessageId)
 
-//     await fetchSSE('https://chat.openai.com/backend-api/conversation', {
+//     await fetchSSE('https://chatgpt.com/backend-api/conversation', {
 //       method: 'POST',
 //       signal: params.signal,
 //       headers: {
