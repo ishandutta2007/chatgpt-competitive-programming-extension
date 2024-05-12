@@ -11,7 +11,7 @@
     "128": "logo.png"
   },
   "permissions": [
-    "storage", 
+    "storage",
     "https://*.openai.com/",
     "https://*.chatgpt.com/"
   ],
